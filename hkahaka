@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مناري حبيبتي</title>
+  <style>
+    body {
+      background: pink;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(-45deg);
+      animation: float 6s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(-45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    #questionSection, #inputSection, #loveMessage, #heartArt {
+      display: none;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #loveMessage {
+      margin-top: 100px;
+      font-size: 24px;
+      color: darkred;
+    }
+
+    #heartArt {
+      font-size: 50px;
+      color: red;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="questionSection">
+  <p>Did you forgive me?</p>
+  <input type="text" id="forgiveAnswer" placeholder="yes أو no" />
+  <button onclick="checkForgiveAnswer()">ارسال</button>
+  <p id="questionError" style="color: red;"></p>
+</div>
+
+<div id="loveMessage"></div>
+
+<div id="inputSection">
+  <p>يلا اكتبي: <strong>احبك عبودي واني مسامحتك</strong></p>
+  <input type="text" id="forgiveInput" placeholder="اكتبي هنا" />
+  <button onclick="checkForgiveness()">ارسال</button>
+  <p id="inputError" style="color: red;"></p>
+</div>
+
+<div id="heartArt">❤️</div>
+
+<script>
+  // Generate hearts
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    heart.style.opacity = Math.random();
+    document.body.appendChild(heart);
+  }
+
+  // Initial message
+  setTimeout(() => {
+    alert("Manarie, I am sorry for what I did");
+    document.getElementById("questionSection").style.display = "block";
+  }, 1000);
+
+  function checkForgiveAnswer() {
+    const input = document.getElementById("forgiveAnswer").value.trim().toLowerCase();
+    const error = document.getElementById("questionError");
+
+    if (input === "yes") {
+      error.innerText = "";
+      showLoveMessage();
+    } else {
+      error.innerText = "جواب غلط جربي مرة ثانية";
+    }
+  }
+
+  function showLoveMessage() {
+    document.getElementById("questionSection").style.display = "none";
+    const msg = document.getElementById("loveMessage");
+    msg.innerText = "عفية بحييبتي الشاطرة مناري الحلوة الجميلة الدلوعة الكتكوتة حبيبة روحي وقلبي زوجتيي وحياتيي وعمرييي منارييي";
+    msg.style.display = "block";
+    setTimeout(() => {
+      document.getElementById("inputSection").style.display = "block";
+    }, 3000);
+  }
+
+  function checkForgiveness() {
+    const input = document.getElementById("forgiveInput").value.trim();
+    const error = document.getElementById("inputError");
+
+    if (input === "احبك عبودي واني مسامحتك") {
+      error.innerText = "";
+      alert("انيهم احبج حبيبتيي");
+      document.getElementById("heartArt").style.display = "block";
+    } else {
+      error.innerText = "غلط حبيبتي اكتبيها صح";
+    }
+  }
+</script>
+
+</body>
+</html>
